@@ -1,0 +1,16 @@
+{
+  "name": "perspectra",
+  "version": "0.1.0",
+  "description": "stupid underdeveloped photoreceptors",
+  "main": "index.js",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "snowpack": "^3.0.11"
+  }
+}
