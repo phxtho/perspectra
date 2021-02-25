@@ -39,3 +39,11 @@ function paintAppBackground(pixelData: Uint8ClampedArray | undefined) {
     app?.setAttribute("style", `background-color: rgba(${r},${g},${b},${a});`);
   }
 }
+
+const colorMap = {
+  black: [0,0,0],
+  white: [255,255,255],
+  red: [255,0,0],
+  orange: [255,128,0],
+  yellow: [255,255,0],
+}
