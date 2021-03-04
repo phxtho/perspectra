@@ -1,4 +1,4 @@
-import init, { rgb_to_hsl } from "ntc-rs";
+import init, { rgb_to_hsl, closest_colour_json } from "ntc-rs";
 
 init();
 
@@ -31,8 +31,10 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
   if (output) {
     const [r, g, b] = pixel;
     const rgb = new Int32Array([r, g, b]);
-    let [h, s, l] = rgb_to_hsl(rgb);
+    const [h, s, l] = rgb_to_hsl(rgb);
     output.innerText = `r:${r} g:${g} b:${b}\n h:${h} s:${s} l:${l}  \noffsetX:${e.offsetX}, offsetY:${e.offsetY} \nvideoWidth:${video.videoWidth} videoHeight:${video.videoHeight}`;
+    const approxColour = JSON.parse(closest_colour_json(rgb));
+    output.innerText += `\n${approxColour?.name}\n${approxColour?.shade}`;
   }
 }
 
