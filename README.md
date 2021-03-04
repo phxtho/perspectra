@@ -21,3 +21,11 @@ To create a production build:
 ```sh
 yarn run build
 ```
+
+## Submodules
+
+Once you've cloned the project download/update the submodules with the recursive flag
+
+```sh
+git submodule update --remote --recursive
+```
