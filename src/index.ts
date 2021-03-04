@@ -34,7 +34,18 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
     const [h, s, l] = rgb_to_hsl(rgb);
     output.innerText = `r:${r} g:${g} b:${b}\n h:${h} s:${s} l:${l}  \noffsetX:${e.offsetX}, offsetY:${e.offsetY} \nvideoWidth:${video.videoWidth} videoHeight:${video.videoHeight}`;
     const approxColour = JSON.parse(closest_colour_json(rgb));
-    output.innerText += `\n${approxColour?.name}\n${approxColour?.shade}`;
+    let lightness = "";
+    if (l > 0 && l < 255 / 3) {
+      lightness = "Dark ";
+      output.style.color = "white";
+    } else if (l > (2 * 255) / 3 && l <= 255) {
+      lightness = "Light ";
+      output.style.color = "black";
+    }
+
+    output.innerText += `\n${approxColour?.name}\n${
+      lightness + approxColour?.shade
+    }`;
   }
 }
 
