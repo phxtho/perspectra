@@ -1,3 +1,7 @@
+import init, { rgb_to_hsl } from "ntc-rs";
+
+init();
+
 async function getMedia(constraints: MediaStreamConstraints) {
   let stream = null;
 
@@ -25,8 +29,10 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
 
   let output = document.getElementById("pixel-pos");
   if (output) {
-    const [r, g, b, a] = pixel;
-    output.innerText = `r:${r} g:${g} b:${b} \noffsetX:${e.offsetX}, offsetY:${e.offsetY} \nvideoWidth:${video.videoWidth} videoHeight:${video.videoHeight}`;
+    const [r, g, b] = pixel;
+    const rgb = new Int32Array([r, g, b]);
+    let [h, s, l] = rgb_to_hsl(rgb);
+    output.innerText = `r:${r} g:${g} b:${b}\n h:${h} s:${s} l:${l}  \noffsetX:${e.offsetX}, offsetY:${e.offsetY} \nvideoWidth:${video.videoWidth} videoHeight:${video.videoHeight}`;
   }
 }
 
@@ -38,12 +44,4 @@ function paintAppBackground(pixelData: Uint8ClampedArray | undefined) {
     const [r, g, b, a] = pixelData;
     app?.setAttribute("style", `background-color: rgba(${r},${g},${b},${a});`);
   }
-}
-
-const colorMap = {
-  black: [0,0,0],
-  white: [255,255,255],
-  red: [255,0,0],
-  orange: [255,128,0],
-  yellow: [255,255,0],
 }
