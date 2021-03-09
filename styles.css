@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  height: 100vh;
+}
+#app {
+  max-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  color: white;
+  background-color: black;
+  height: 5vh;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.video-container {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+  height: 95vh;
+}
+
+.video-container video {
+  height: 100%;
+  object-fit: contain;
+}
+
+.colour-details-container {
+  color: white;
+  background-color: rgba(0, 0, 0, 75%);
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
