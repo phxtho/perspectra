@@ -23,7 +23,9 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
   canvas.height = video.videoHeight;
   let canvasCtx = canvas.getContext("2d");
   canvasCtx?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-  let pixel = canvasCtx?.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+  const x = (video.videoWidth / video.clientWidth) * e.offsetX;
+  const y = (video.videoHeight / video.clientHeight) * e.offsetY;
+  let pixel = canvasCtx?.getImageData(x, y, 1, 1).data;
 
   paintAppBackground(pixel);
 
@@ -37,13 +39,15 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
     let lightness = "";
     if (l > 0 && l < 255 / 3) {
       lightness = "Dark ";
-      output.style.color = "white";
     } else if (l > (2 * 255) / 3 && l <= 255) {
       lightness = "Light ";
-      output.style.color = "black";
     }
-
-    output.innerText += `\n${approxColour?.name}\n${
+    lightness =
+      approxColour?.shade?.trim().toLowerCase() != "white" ||
+      approxColour?.shade?.trim().toLowerCase() != "black"
+        ? lightness
+        : "";
+    output.innerText += `\ncolour name: ${approxColour?.name}\nshade: ${
       lightness + approxColour?.shade
     }`;
   }
