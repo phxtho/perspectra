@@ -1,4 +1,4 @@
-import init, { rgb_to_hsl } from "ntc-rs";
+import init, { rgb_to_hsl, closest_colour_json } from "ntc-rs";
 
 init();
 
@@ -23,7 +23,9 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
   canvas.height = video.videoHeight;
   let canvasCtx = canvas.getContext("2d");
   canvasCtx?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-  let pixel = canvasCtx?.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+  const x = (video.videoWidth / video.clientWidth) * e.offsetX;
+  const y = (video.videoHeight / video.clientHeight) * e.offsetY;
+  let pixel = canvasCtx?.getImageData(x, y, 1, 1).data;
 
   paintAppBackground(pixel);
 
@@ -31,8 +33,23 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
   if (output) {
     const [r, g, b] = pixel;
     const rgb = new Int32Array([r, g, b]);
-    let [h, s, l] = rgb_to_hsl(rgb);
+    const [h, s, l] = rgb_to_hsl(rgb);
     output.innerText = `r:${r} g:${g} b:${b}\n h:${h} s:${s} l:${l}  \noffsetX:${e.offsetX}, offsetY:${e.offsetY} \nvideoWidth:${video.videoWidth} videoHeight:${video.videoHeight}`;
+    const approxColour = JSON.parse(closest_colour_json(rgb));
+    let lightness = "";
+    if (l > 0 && l < 255 / 3) {
+      lightness = "Dark ";
+    } else if (l > (2 * 255) / 3 && l <= 255) {
+      lightness = "Light ";
+    }
+    lightness =
+      approxColour?.shade?.trim().toLowerCase() != "white" ||
+      approxColour?.shade?.trim().toLowerCase() != "black"
+        ? lightness
+        : "";
+    output.innerText += `\ncolour name: ${approxColour?.name}\nshade: ${
+      lightness + approxColour?.shade
+    }`;
   }
 }
 
