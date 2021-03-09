@@ -1,5 +1,5 @@
-import * as __SNOWPACK_ENV__ from '../../_snowpack/env.js';
-import.meta.env = __SNOWPACK_ENV__;
+// import * as __SNOWPACK_ENV__ from '../../_snowpack/env.js';
+// import.meta.env = __SNOWPACK_ENV__;
 
 
 let wasm;
