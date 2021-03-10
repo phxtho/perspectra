@@ -37,3 +37,12 @@ body {
   bottom: 0;
   width: 100%;
 }
+
+#mouse-box {
+  position: absolute;
+  background-color: yellow;
+  --size: 5px;
+  border-width: 1px;
+  height: var(--size);
+  width: var(--size);
+}

@@ -2,6 +2,14 @@ import init, { rgb_to_hsl, closest_colour_json } from "ntc-rs";
 
 init();
 
+function placeMouseBox(e: MouseEvent) {
+  let mouseBox = document.getElementById("mouse-box");
+  if (mouseBox?.style) {
+    mouseBox.style.top = e.offsetY + "px";
+    mouseBox.style.left = e.clientX + "px";
+  }
+}
+
 async function getMedia(constraints: MediaStreamConstraints) {
   let stream = null;
 
@@ -10,8 +18,10 @@ async function getMedia(constraints: MediaStreamConstraints) {
     let video = document.getElementById("video") as HTMLVideoElement;
     video.srcObject = stream;
     video.onloadedmetadata = (e) => video.play();
-    video.addEventListener("click", (e) => processVideoClick(e, video));
-    video.addEventListener("mousemove", (e) => processVideoClick(e, video));
+    video.addEventListener("mousemove", (e) => {
+      placeMouseBox(e);
+      processVideoClick(e, video);
+    });
   } catch (error) {
     console.log(error.name + ": " + error.message);
   }
@@ -53,7 +63,9 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
   }
 }
 
-window.onload = (e: Event) => getMedia({ video: true });
+window.onload = (e: Event) => {
+  getMedia({ video: true });
+};
 
 function paintAppBackground(pixelData: Uint8ClampedArray | undefined) {
   if (pixelData) {
