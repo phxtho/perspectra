@@ -5,15 +5,15 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
-    "clean": "rm dist/bundle.js",
-    "start": "snowpack dev",
-    "build": "snowpack build",
-    "deploy": "gh-pages -d build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "gh-pages": "^3.1.0",
     "prettier": "^2.2.1",
-    "snowpack": "^3.0.11"
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
   },
   "homepage": "https://phxtho.github.io/perspectra",
   "dependencies": {
