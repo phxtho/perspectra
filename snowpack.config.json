@@ -4,14 +4,7 @@
     "src": "/"
   },
   "plugins": [
-    [
-      "snowpack-plugin-wasm-pack",
-      {
-        "projectPath": "./ntc-rs"
-      }
-    ]
+    []
   ],
-  "alias": {
-    "ntc-rs": "./ntc-rs/pkg"
-  }
+  "alias": {}
 }

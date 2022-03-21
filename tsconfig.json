@@ -9,10 +9,9 @@
     "moduleResolution": "node",
     "target": "es2015",
     "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-      "ntc-rs": ["./ntc-rs/pkg"]
-    }
+    "baseUrl": "./"
   },
-  "include": ["./src/**/*"]
+  "include": [
+    "./src/**/*"
+  ]
 }
