@@ -15,7 +15,7 @@ async function getMedia(constraints: MediaStreamConstraints) {
     stream = await navigator.mediaDevices.getUserMedia(constraints);
     let video = document.getElementById("video") as HTMLVideoElement;
     video.srcObject = stream;
-    video.onloadedmetadata = (e) => video.play();
+    video.onloadedmetadata = () => video.play();
     video.addEventListener("mousemove", (e) => {
       placeMouseBox(e);
       processVideoClick(e, video);
@@ -62,7 +62,7 @@ function processVideoClick(e: MouseEvent, video: HTMLVideoElement) {
   }
 }
 
-window.onload = (e: Event) => {
+window.onload = () => {
   getMedia({ video: true });
 };
 
