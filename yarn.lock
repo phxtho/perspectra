@@ -377,10 +377,10 @@ normalize-url@^1.0.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-ntc-rs@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ntc-rs/-/ntc-rs-0.1.2.tgz#6f04610e48403848338473aea1fa19806eda5554"
-  integrity sha512-qsUXUbUn4cVL4dThoSyeinqnir0FP8SYF0ga+kjiXr7wPhrnKcWMxj+YanXDg9hQsL0ab50S9n5GM1hsRuWEOw==
+ntc-rs@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/ntc-rs/-/ntc-rs-0.1.3.tgz#e2c210d604c3c41d7b9abc309cc508fb1880c5ff"
+  integrity sha512-A8At/694VCh4hCCXntT/NVPm742epY0ATZb8UQMWMjrwgXsux3dcMc8tjBuAZWUTttO2q4clDYPO5cPoPXvH8A==
 
 object-assign@^4.0.1, object-assign@^4.1.0:
   version "4.1.1"
