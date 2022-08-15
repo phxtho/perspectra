@@ -18,15 +18,28 @@ body {
 }
 
 .video-container {
-  position: relative;
-  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  height: 95vh;
 }
 
 .video-container video {
-  height: 100%;
-  object-fit: contain;
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateY(180deg);
 }
 
 .colour-details-container {
@@ -39,6 +52,7 @@ body {
 }
 
 #mouse-box {
+  border-radius: 50%;
   position: absolute;
   background-color: yellow;
   --size: 5px;
