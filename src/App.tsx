@@ -3,6 +3,7 @@ import { FunctionComponent } from "react";
 import "./App.css";
 import Video from "./video/video";
 import init, { closest_colour, Colour } from "../node_modules/ntc-rs";
+import Cursor from "./cursor/cursor";
 
 interface AppProps {}
 

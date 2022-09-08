@@ -1,9 +1,11 @@
-import React, { FunctionComponent, useEffect, useRef } from "react";
+import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import Cursor from "../cursor/cursor";
 import "./video.css";
 
 interface VideoProps {
   onMouseMove?: (averageRGBA: number[]) => void;
   onClick?: (averageRGBA: number[]) => void;
+  radius?: number;
 }
 
 async function setupVideo(videoEl: HTMLVideoElement) {
@@ -19,7 +21,7 @@ async function setupVideo(videoEl: HTMLVideoElement) {
   }
 }
 
-const processVideo = (
+const getColourFromVideo = (
   e: React.MouseEvent<HTMLVideoElement, MouseEvent>,
   canvas: HTMLCanvasElement,
   radius: number = 4
@@ -58,9 +60,26 @@ const averageRGBA = (imageData: Uint8ClampedArray): number[] => {
   return average.map((value) => value / (imageData.length / 4));
 };
 
-const Video: FunctionComponent<VideoProps> = ({ onClick, onMouseMove }) => {
+const getMousePosition = (
+  e: React.MouseEvent<HTMLVideoElement, MouseEvent>
+): [number, number] => {
+  if (e.target instanceof HTMLVideoElement) {
+    const x = e.pageX;
+    const y = e.pageY;
+    return [x, y];
+  }
+  return [0, 0];
+};
+
+const Video: FunctionComponent<VideoProps> = ({
+  onClick,
+  onMouseMove,
+  radius = 15,
+}) => {
   const videoEl = useRef<HTMLVideoElement>(null);
   const canvasEl = useRef<HTMLCanvasElement>(null);
+  const [[x, y], setMousePosition] = React.useState<[number, number]>([0, 0]);
+  const [averageRGBA, setAverageRGBA] = useState<number[]>();
   useEffect(() => {
     if (videoEl.current) {
       setupVideo(videoEl.current);
@@ -68,15 +87,21 @@ const Video: FunctionComponent<VideoProps> = ({ onClick, onMouseMove }) => {
   }, []);
   return (
     <div id="video-container" className="video-container">
+      <canvas ref={canvasEl} />
       <video
         id="video"
         ref={videoEl}
         onMouseMove={(e) => {
-          onMouseMove?.(processVideo(e, canvasEl.current!));
+          const colour = getColourFromVideo(e, canvasEl.current!, radius);
+          setAverageRGBA(colour);
+          onMouseMove?.(colour);
+          setMousePosition(getMousePosition(e));
         }}
-        onClick={(e) => onClick?.(processVideo(e, canvasEl.current!))}
+        onClick={(e) =>
+          onClick?.(getColourFromVideo(e, canvasEl.current!, radius))
+        }
       ></video>
-      <canvas ref={canvasEl} />
+      <Cursor radius={radius} x={x} y={y} colour={averageRGBA} />
     </div>
   );
 };

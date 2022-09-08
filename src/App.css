@@ -28,12 +28,4 @@ body {
   width: 100%;
 }
 
-#mouse-box {
-  border-radius: 50%;
-  position: absolute;
-  background-color: yellow;
-  --size: 5px;
-  border-width: 1px;
-  height: var(--size);
-  width: var(--size);
-}
+
