@@ -17,17 +17,7 @@ body {
   margin: 0;
 }
 
-.video-container {
-  position: relative;
-  text-align: center;
-  overflow: hidden;
-  height: 95vh;
-}
 
-.video-container video {
-  height: 100%;
-  object-fit: contain;
-}
 
 .colour-details-container {
   color: white;
@@ -38,11 +28,4 @@ body {
   width: 100%;
 }
 
-#mouse-box {
-  position: absolute;
-  background-color: yellow;
-  --size: 5px;
-  border-width: 1px;
-  height: var(--size);
-  width: var(--size);
-}
+
