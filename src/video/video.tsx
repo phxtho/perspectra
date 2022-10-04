@@ -8,6 +8,22 @@ interface VideoProps {
   radius?: number;
 }
 
+const logCoord = (e: MouseEvent) => {
+  console.log(`
+  Page: ${e.pageX}, ${e.pageY}
+  Screen X/Y: ${e.screenX}, ${e.screenY}
+  Client X/Y: ${e.clientX}, ${e.clientY}`);
+};
+
+const logVideoDetails = (video: HTMLVideoElement) => {
+  console.log(`
+  Video W/H: ${video.videoWidth} ${video.videoHeight}
+  Video Client W/H: ${video.clientWidth} ${video.clientHeight}
+  CvVScale: ${videoToCanvasScale(video)}
+  VvCScale: ${1 / videoToCanvasScale(video)}
+  `);
+};
+
 async function setupVideo(videoEl: HTMLVideoElement) {
   try {
     const cameraStream = await navigator.mediaDevices.getUserMedia({
@@ -71,6 +87,10 @@ const getMousePosition = (
   return [0, 0];
 };
 
+const videoToCanvasScale = (videoElement: HTMLVideoElement) => {
+  return videoElement.clientWidth / videoElement.videoWidth;
+};
+
 const Video: FunctionComponent<VideoProps> = ({
   onClick,
   onMouseMove,
@@ -97,11 +117,19 @@ const Video: FunctionComponent<VideoProps> = ({
           onMouseMove?.(colour);
           setMousePosition(getMousePosition(e));
         }}
-        onClick={(e) =>
-          onClick?.(getColourFromVideo(e, canvasEl.current!, radius))
-        }
+        onClick={(e) => {
+          logVideoDetails(e.target as HTMLVideoElement);
+          onClick?.(getColourFromVideo(e, canvasEl.current!, radius));
+        }}
       ></video>
-      <Cursor radius={radius} x={x} y={y} colour={averageRGBA} />
+      {videoEl.current && (
+        <Cursor
+          radius={radius * videoToCanvasScale(videoEl.current)}
+          x={x}
+          y={y}
+          colour={averageRGBA}
+        />
+      )}
     </div>
   );
 };

@@ -24,8 +24,8 @@ const Cursor: FunctionComponent<CursorProps> = ({
       style={{
         height: px(radius),
         width: px(radius),
-        top: px(y - radius / 2),
-        left: px(x - radius / 2),
+        top: px(y),
+        left: px(x),
         backgroundColor: rgba(colour),
       }}
     ></div>
