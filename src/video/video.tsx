@@ -42,7 +42,7 @@ const getColourFromVideo = (
   canvas: HTMLCanvasElement,
   radius: number = 4
 ): number[] => {
-  return averageRGBA(extractRGBA(e, canvas, radius));
+  return averageRGBA(extractRGBA(e, canvas, radius)).map(Math.round);
 };
 
 const extractRGBA = (

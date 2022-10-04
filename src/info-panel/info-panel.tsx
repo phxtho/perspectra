@@ -1,31 +1,19 @@
-import * as NTC from "ntc-rs";
-import React, { FunctionComponent } from "react";
-import { hexToRGB, RGBToHSL } from "../utils";
+import { Colors, Palette } from "color-namer";
+import React, { FC } from "react";
 import "./info-panel.css";
 
 interface InfoPanelProps {
   rgba: number[];
-  colour: NTC.Colour;
+  colour: Colors<Palette>;
 }
 
-const hex = (colour: NTC.Colour) => `#${colour.hex}`;
-const formatColour = (colour: NTC.Colour) => {
-  const rgb = hexToRGB(`#${colour.hex}`);
-  console.log(rgb);
-
-  const luminance = RGBToHSL(rgb)[2];
-  if (luminance < 33) return "Dark" + " " + colour.shade;
-  else if (luminance > 66) return "Light" + " " + colour.shade;
-
-  return colour.shade;
-};
-
-const InfoPanel: FunctionComponent<InfoPanelProps> = ({ colour }) => {
+const InfoPanel: FC<InfoPanelProps> = ({ colour, rgba }) => {
   return (
-    <div className="info-panel" style={{ backgroundColor: hex(colour) }}>
-      <span style={{ mixBlendMode: "difference", color: "white" }}>
-        {formatColour(colour)}
-      </span>
+    <div
+      className="info-panel"
+      style={{ backgroundColor: `rgba(${rgba.join(",")})` }}
+    >
+      <span style={{ mixBlendMode: "difference", color: "white" }}>Colour</span>
     </div>
   );
 };
