@@ -8,13 +8,6 @@ interface VideoProps {
   radius?: number;
 }
 
-const logCoord = (e: MouseEvent) => {
-  console.log(`
-  Page: ${e.pageX}, ${e.pageY}
-  Screen X/Y: ${e.screenX}, ${e.screenY}
-  Client X/Y: ${e.clientX}, ${e.clientY}`);
-};
-
 const logVideoDetails = (video: HTMLVideoElement) => {
   console.log(`
   Video W/H: ${video.videoWidth} ${video.videoHeight}

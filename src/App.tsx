@@ -3,13 +3,13 @@ import { FunctionComponent } from "react";
 import "./App.css";
 import Video from "./video/video";
 import InfoPanel from "./info-panel/info-panel";
-import namer, { Colors, Palette } from "color-namer";
+import namer, { Colors } from "color-namer";
 
 interface AppProps {}
 
 const App: FunctionComponent<AppProps> = () => {
   const [selectedRGBA, setSelectedRGBA] = useState<number[]>();
-  const [colour, setColour] = useState<Colors<Palette>>();
+  const [colour, setColour] = useState<Colors<"ntc">>();
 
   useEffect(() => {
     if (colour) {
@@ -24,7 +24,9 @@ const App: FunctionComponent<AppProps> = () => {
         radius={15}
         onClick={(rgba) => {
           setSelectedRGBA(rgba);
-          setColour(namer(`rgb(${rgba.slice(0, 3).join(",")})`));
+          const val = `rgb(${rgba.slice(0, 3).join(",")})`;
+          const options = { pick: ["basic", "ntc", "html"] } as any;
+          setColour(namer(val, options));
         }}
       />
       {colour && selectedRGBA && (
