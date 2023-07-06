@@ -2,33 +2,38 @@ import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
 import "./App.css";
 import Video from "./video/video";
-import init, { closest_colour, Colour } from "../node_modules/ntc-rs";
-import Cursor from "./cursor/cursor";
+import InfoPanel from "./info-panel/info-panel";
+import namer, { Colors } from "color-namer";
 
 interface AppProps {}
 
 const App: FunctionComponent<AppProps> = () => {
   const [selectedRGBA, setSelectedRGBA] = useState<number[]>();
-  const [colour, setColour] = useState<Colour>();
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  useEffect(() => {
-    if (selectedRGBA) {
-      const [r, g, b] = selectedRGBA;
-      setColour(closest_colour(new Int32Array([r, g, b])));
-    }
-  }, [selectedRGBA]);
+  const [colour, setColour] = useState<Colors<"ntc">>();
 
   useEffect(() => {
     if (colour) {
-      console.log(colour.name);
+      console.log(colour);
+      console.log(selectedRGBA);
     }
   }, [colour]);
 
-  return <Video onClick={(colour) => setSelectedRGBA(colour)} />;
+  return (
+    <div>
+      <Video
+        radius={15}
+        onClick={(rgba) => {
+          setSelectedRGBA(rgba);
+          const val = `rgb(${rgba.slice(0, 3).join(",")})`;
+          const options = { pick: ["basic", "ntc", "html"] } as any;
+          setColour(namer(val, options));
+        }}
+      />
+      {colour && selectedRGBA && (
+        <InfoPanel rgba={selectedRGBA} colour={colour} />
+      )}
+    </div>
+  );
 };
 
 export default App;

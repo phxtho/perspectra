@@ -1,7 +1,8 @@
 #mouse-box {
-  border-radius: 25%;
+  border-radius: 5%;
   position: absolute;
   background-color: yellow;
   border: 1px solid rgba(245, 245, 245, 0.2);
   pointer-events: none;
+  /* transform: translate(-50%, -50%) rotateY(180deg); */
 }

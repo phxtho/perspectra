@@ -1,31 +1,7 @@
 # Perspectra
 
-## How to run on localhost
+Computes the nearest named colour to a set of pixel values
 
-First install dependencies:
+<img src="docs/demo.png" width="100%" aspect-ratio="16 / 9">
 
-```sh
-yarn
-```
-
-To run in dev mode mode:
-
-```sh
-yarn start
-```
-
-Then go to http://localhost:8080
-
-To create a production build:
-
-```sh
-yarn run build
-```
-
-## Submodules
-
-Once you've cloned the project download/update the submodules with the recursive flag
-
-```sh
-git submodule update --remote --recursive
-```
+I made slides about this project over at phxtho.github.io/colour-blind-leading-blind-slides/

@@ -1,0 +1,53 @@
+.info-panel {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -15%);
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.colour-block {
+  width: 100%;
+  display: block;
+  background-color: #fff;
+  padding: 0px;
+  box-shadow: 0 0 14px 0px rgb(0 0 0 / 5%);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  margin-right: 8px;
+}
+
+.colour-block__colour {
+  border-radius: 0px;
+  overflow: hidden;
+  margin-bottom: 4p;
+  height: 100px;
+  width: 100%;
+}
+
+.title-info {
+  display: block;
+  display: grid;
+  grid-template-columns: auto 20px;
+  grid-gap: 6px;
+  padding: 4px 12px 8px 12px;
+}
+.colour-block h2 {
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+  line-height: 140%;
+  text-transform: capitalize;
+}
+
+.colour-block .hx {
+  color: #ccc;
+  font-size: 10px;
+  display: block;
+  padding: 5px 0 0 0;
+  line-height: 100%;
+  text-transform: capitalize;
+}
